@@ -1,0 +1,266 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+/* seamless cross-page navigation (Profile <-> Portfolio) in browsers that support it;
+   plain instant navigation everywhere else, so nothing breaks */
+@view-transition {
+  navigation: auto;
+}
+
+:root{
+  /* committed dark-navy identity — no light variant, by design */
+  --bg:#0B0F1A;
+  --surface:#131A2B;
+  --surface-2:#1B2338;
+  --surface-3:#232C45;
+  --ink:#F2F4F8;
+  --ink-soft:#9AA5BD;
+  --ink-faint:#6B7690;
+  --border:#232C45;
+  --accent:#E2A13A;
+  --accent-strong:#F0B24C;
+  --accent-ink:#1A1206;
+  --accent-soft:rgba(226,161,58,0.14);
+  --shadow:rgba(0,0,0,0.5);
+  --text-measure:640px; /* shared paragraph width so body copy lines up across the site */
+}
+html{ color-scheme:dark; }
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
+  padding-inline:clamp(20px,5vw,64px); line-height:1.6;
+}
+::selection{ background:var(--accent-soft); color:var(--ink); }
+.wrap{ max-width:1100px; margin:0 auto; }
+a{ color:inherit; }
+h1,h2,h3{ font-family:'Clash Display',system-ui,sans-serif; font-weight:600; text-wrap:balance; margin:0; color:var(--ink); }
+.accent-name{ color:var(--accent); }
+.hl{ color:var(--accent); }
+.eyebrow{
+  font-family:'Clash Display',system-ui,sans-serif; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--accent); margin:0 0 12px; font-weight:600;
+}
+p{ color:var(--ink-soft); }
+
+/* ---- background: soft, smoggy atmosphere instead of a hard stripe pattern ---- */
+.bg-texture{
+  position:fixed; inset:0; z-index:-2; pointer-events:none;
+  view-transition-name: page-bg;
+  background:
+    radial-gradient(ellipse 900px 550px at 85% -5%, var(--accent-soft), transparent 60%),
+    radial-gradient(ellipse 900px 650px at -10% 30%, rgba(255,255,255,0.05), transparent 65%),
+    radial-gradient(ellipse 1100px 700px at 60% 110%, rgba(255,255,255,0.035), transparent 60%);
+}
+.bg-texture::after{
+  content:""; position:absolute; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:0.035; mix-blend-mode:overlay;
+}
+
+/* ---- NAV ---- */
+nav{
+  position:sticky; top:0; z-index:20;
+  background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;
+  view-transition-name: site-nav;
+}
+nav.scrolled{ border-bottom-color:var(--border); }
+.nav-inner{
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+  padding-block:clamp(32px,5vw,48px);
+}
+.brand{ grid-column:1; justify-self:start; display:flex; align-items:center; gap:10px; text-decoration:none; }
+.brand .mark{
+  font-family:'Clash Display'; font-weight:700; font-size:1rem; color:var(--accent-ink);
+  background:var(--accent); width:34px; height:34px; border-radius:9px;
+  display:flex; align-items:center; justify-content:center; flex:none;
+}
+.brand .name{ font-weight:600; font-size:0.98rem; color:var(--ink); }
+
+.navlinks{ grid-column:2; justify-self:center; display:flex; align-items:center; gap:8px; font-family:'Clash Display',system-ui,sans-serif; }
+.navlinks a{
+  text-decoration:none; font-size:0.82rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ink-soft); padding:9px 20px; border-radius:100px; transition:color .15s;
+}
+.navlinks a:hover{ color:var(--accent); }
+/* the active page gets a solid pill behind it; giving it a shared view-transition-name
+   makes the pill slide/morph from one link to the other when navigating, in browsers
+   that support cross-document view transitions (see @view-transition above) */
+.navlinks a.active{
+  background:var(--accent); color:var(--bg);
+  view-transition-name: nav-active-pill;
+}
+.navlinks .sep{ color:var(--border); }
+
+/* ---- BUTTON ---- */
+.btn{
+  display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-weight:700; font-size:0.92rem;
+  color:var(--accent-ink); background:var(--accent); padding:12px 24px; border-radius:100px; margin-top:6px;
+  transition:background .15s, transform .15s;
+}
+.btn:hover{ background:var(--accent-strong); transform:translateY(-1px); }
+.btn.arrow::after{ content:"\2197"; }
+
+/* ---- PROFILE CARD (index.html) ---- */
+.profile-card{
+  border:1px solid var(--border); border-radius:28px; overflow:hidden; background:var(--surface);
+  box-shadow:0 30px 60px -30px var(--shadow);
+}
+.card-top{
+  display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(24px,4vw,56px); align-items:center;
+  padding:clamp(32px,5vw,64px);
+}
+.card-text{ display:flex; flex-direction:column; align-items:flex-start; }
+.card-text h1{ font-size:clamp(2.1rem,4.5vw,3.2rem); line-height:1.05; }
+.titles{
+  font-family:'Space Mono',monospace; font-size:0.82rem; letter-spacing:0.03em; color:var(--ink-faint);
+  margin:14px 0 0;
+}
+.titles .sep{ color:var(--border); margin-inline:8px; }
+.card-text .bio{ margin-top:20px; font-size:1.02rem; max-width:50ch; }
+.card-text .btn{ margin-top:26px; }
+
+.card-photo{ border-radius:18px; overflow:hidden; background:var(--surface-2); aspect-ratio:3/4; }
+.card-photo img{ width:100%; height:100%; object-fit:cover; object-position:50% 15%; display:block; }
+
+.card-footer{
+  display:flex; align-items:center; justify-content:flex-start; gap:12px; flex-wrap:wrap;
+  padding:22px clamp(32px,5vw,64px); background:var(--accent-soft); border-top:1px solid var(--border);
+  font-size:0.92rem; font-weight:600;
+}
+.card-footer .contact-label{
+  color:var(--ink-faint); font-family:'Space Mono',monospace; font-size:0.78rem;
+  letter-spacing:0.05em; text-transform:uppercase;
+}
+.card-footer a{ text-decoration:none; border-bottom:1px solid transparent; transition:color .15s, border-color .15s; }
+.card-footer a:hover{ color:var(--accent); border-color:var(--accent); }
+.card-footer .dot{ color:var(--ink-faint); }
+
+/* ---- SECTION SHELL (portfolio.html) ---- */
+section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border); }
+.section-head{ margin-bottom:40px; }
+.section-head h2{ font-size:clamp(1.5rem,3vw,2.1rem); margin-top:6px; }
+
+/* the case intro is a plain header, not a section — it shouldn't carry a second
+   full section padding on top of #process's own, which was leaving a huge gap */
+.case-intro{ padding-block:clamp(40px,6vw,64px) 8px; }
+.case-intro h1{ font-size:clamp(2.2rem,5vw,3.4rem); line-height:1.05; }
+.case-intro .bio{ margin-top:18px; font-size:1.05rem; }
+
+/* ---- ADDIE ROWS ---- */
+.addie{ display:flex; flex-direction:column; }
+.stage{
+  display:grid; grid-template-columns:180px 1fr; gap:clamp(20px,4vw,48px);
+  padding-block:clamp(28px,4vw,40px); border-top:1px solid var(--border);
+}
+.stage:first-child{ border-top:none; padding-top:0; }
+.stage-label{ display:flex; flex-direction:column; gap:6px; position:sticky; top:88px; align-self:start; }
+.stage-num{ font-family:'Clash Display',system-ui,sans-serif; color:var(--accent); font-size:0.85rem; font-weight:600; }
+.stage-label h3{ font-size:1.3rem; }
+
+/* stage paragraphs fill the same column the image gallery below them uses —
+   only the standalone intro bio (nothing next to it) gets a fixed reading measure */
+.stage-media{ display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap; margin:20px 0; }
+.shot{
+  margin:0; border-radius:10px; overflow:hidden; border:1px solid var(--border); background:var(--surface);
+  box-shadow:0 14px 30px -18px var(--shadow); width:270px; flex:none; cursor:zoom-in;
+}
+.shot img{ display:block; width:100%; height:auto; transition:transform .2s; }
+.shot:hover img{ transform:scale(1.04); }
+.shot figcaption{
+  display:flex; align-items:center; min-height:50px;
+  font-family:'Clash Display',system-ui,sans-serif; font-weight:600; font-size:0.78rem; letter-spacing:0.01em;
+  color:var(--accent-ink); background:linear-gradient(100deg, var(--accent), var(--accent-strong));
+  padding:8px 14px;
+}
+.shot.placeholder{
+  aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; text-align:center;
+  border-style:dashed; padding:14px;
+}
+.shot.placeholder span{ font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--ink-faint); }
+
+/* ---- Analyse stage: description + vertical content-flow side by side ---- */
+.analyse-grid{
+  display:grid; grid-template-columns:1fr 300px; gap:clamp(24px,4vw,56px); align-items:start;
+  margin-bottom:24px;
+}
+.flow-vertical{
+  display:flex; flex-direction:column; border:1px solid var(--border); border-radius:10px;
+  background:var(--surface); padding:22px 18px;
+}
+.flow-step{
+  position:relative; background:var(--surface-2); border:1px solid var(--border); border-radius:8px;
+  padding:10px 14px; font-family:'Space Mono',monospace; font-size:0.76rem; text-align:center; color:var(--ink);
+}
+.flow-step + .flow-step{ margin-top:24px; }
+.flow-step + .flow-step::before{
+  content:""; position:absolute; left:50%; top:-24px; width:1px; height:24px;
+  background:var(--border); transform:translateX(-50%);
+}
+.flow-step:first-child{ font-weight:700; }
+.flow-step.highlight{
+  background:var(--accent-soft); border-color:var(--accent); color:var(--accent); font-weight:700;
+  font-family:'Clash Display',system-ui,sans-serif;
+}
+
+.analyse-list{ list-style:none; margin:0 0 20px; padding:0; color:var(--ink-soft); }
+.analyse-list li{ position:relative; padding-left:24px; margin-bottom:8px; }
+.analyse-list li::before{ content:"\2192"; position:absolute; left:0; color:var(--accent); }
+
+.objectives{ display:flex; flex-direction:column; gap:10px; margin:18px 0; }
+.objective-box{
+  background:var(--accent-soft); border:1px solid var(--accent); border-radius:10px;
+  padding:12px 16px; color:var(--accent); font-weight:600; font-size:0.92rem;
+  font-family:'Clash Display',system-ui,sans-serif;
+}
+
+/* ---- LIGHTBOX (click a CDD/slide screenshot to view it larger) ---- */
+.lightbox{
+  position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center;
+  background:rgba(4,6,12,0.88); backdrop-filter:blur(4px); padding:32px; cursor:zoom-out;
+}
+.lightbox[hidden]{ display:none; }
+.lightbox img{ max-width:92vw; max-height:88vh; border-radius:10px; box-shadow:0 30px 60px -20px var(--shadow); }
+.lightbox-close{
+  position:absolute; top:20px; right:24px; width:40px; height:40px; border-radius:100px;
+  border:1px solid var(--border); background:var(--surface); color:var(--ink);
+  font-size:1.2rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;
+}
+.lightbox-close:hover{ border-color:var(--accent); color:var(--accent); }
+
+/* ---- FOOTER ---- */
+footer{ padding-block:40px 56px; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px; }
+footer .who{ font-weight:600; margin-bottom:6px; }
+.foot-links{ display:flex; gap:20px; flex-wrap:wrap; }
+.foot-links a{ text-decoration:none; color:var(--ink-soft); font-size:0.88rem; }
+.foot-links a:hover{ color:var(--accent); }
+.copyright{ font-family:'Space Mono',monospace; font-size:0.74rem; color:var(--ink-faint); }
+
+@media (prefers-reduced-motion: no-preference){
+  .load-in > *{ animation: rise .55s ease both; }
+  .load-in > *:nth-child(1){ animation-delay: 0s; }
+  .load-in > *:nth-child(2){ animation-delay: .08s; }
+  .load-in > *:nth-child(3){ animation-delay: .16s; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+}
+
+@media (max-width:860px){
+  .card-top{ grid-template-columns:1fr; }
+  .card-photo{ order:-1; max-width:320px; margin:0 auto; width:100%; }
+  .stage{ grid-template-columns:1fr; }
+  .stage-label{ position:static; flex-direction:row; align-items:baseline; gap:12px; }
+  .analyse-grid{ grid-template-columns:1fr; }
+  .flow-vertical{ max-width:320px; }
+}
+@media (max-width:600px){
+  .shot{ width:100%; }
+  .card-footer{ justify-content:flex-start; }
+}
+@media (max-width:480px){
+  .brand .name{ display:none; }
+  .navlinks{ gap:12px; }
+  .navlinks a{ font-size:0.74rem; letter-spacing:0.06em; }
+}
