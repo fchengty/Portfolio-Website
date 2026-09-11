@@ -86,23 +86,32 @@ nav.scrolled{ border-bottom-color:var(--border); }
   color:var(--ink-soft); padding:9px 20px; border-radius:100px; transition:color .15s;
 }
 .navlinks a:hover{ color:var(--accent); }
-/* the active page gets a solid pill behind it; giving it a shared view-transition-name
-   makes the pill slide/morph from one link to the other when navigating, in browsers
-   that support cross-document view transitions (see @view-transition above) */
-.navlinks a.active{
-  background:var(--accent); color:var(--bg);
-  view-transition-name: nav-active-pill;
-}
+.navlinks a.active{ background:var(--accent); color:var(--bg); }
 .navlinks .sep{ color:var(--border); }
+/* each link keeps a permanent, page-independent transition identity (not tied to
+   .active) so the browser can crossfade each link's own old->new appearance in
+   place during navigation. Naming only the active one caused the *other* link's
+   text to mismatch between the old/new "leftover" snapshot and flash/ghost. */
+#nav-profile{ view-transition-name: nav-link-profile; }
+#nav-portfolio{ view-transition-name: nav-link-portfolio; }
 
 /* ---- BUTTON ---- */
 .btn{
-  display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-weight:700; font-size:0.92rem;
+  display:inline-flex; align-items:center; text-decoration:none; font-weight:700; font-size:0.92rem;
   color:var(--accent-ink); background:var(--accent); padding:12px 24px; border-radius:100px; margin-top:6px;
   transition:background .15s, transform .15s;
 }
 .btn:hover{ background:var(--accent-strong); transform:translateY(-1px); }
-.btn.arrow::after{ content:"\2197"; }
+.btn-row{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+/* icon is collapsed to nothing at rest; hovering grows it in so the button text
+   smoothly reveals an arrow (navigate) or download icon, instead of showing it always */
+.btn-icon{
+  display:inline-flex; align-items:center; justify-content:center; flex:none;
+  width:0; opacity:0; margin-left:0; overflow:hidden;
+  transition:width .25s ease, opacity .2s ease, margin-left .25s ease;
+}
+.btn-icon svg{ width:14px; height:14px; flex:none; }
+.btn:hover .btn-icon{ width:14px; opacity:1; margin-left:8px; }
 
 /* ---- PROFILE CARD (index.html) ---- */
 .profile-card{
@@ -121,7 +130,7 @@ nav.scrolled{ border-bottom-color:var(--border); }
 }
 .titles .sep{ color:var(--border); margin-inline:8px; }
 .card-text .bio{ margin-top:20px; font-size:1.02rem; max-width:50ch; }
-.card-text .btn{ margin-top:26px; }
+.card-text .btn-row{ margin-top:26px; }
 
 .card-photo{ border-radius:18px; overflow:hidden; background:var(--surface-2); aspect-ratio:3/4; }
 .card-photo img{ width:100%; height:100%; object-fit:cover; object-position:50% 15%; display:block; }
@@ -170,6 +179,9 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
 }
 .shot img{ display:block; width:100%; height:auto; transition:transform .2s; }
 .shot:hover img{ transform:scale(1.04); }
+/* CDD pages are tall Word-doc screenshots with slightly different proportions —
+   crop them to one consistent shape so the row of cards lines up evenly */
+.shot.doc img{ aspect-ratio:3/4; object-fit:cover; object-position:top; }
 .shot figcaption{
   display:flex; align-items:center; min-height:50px;
   font-family:'Clash Display',system-ui,sans-serif; font-weight:600; font-size:0.78rem; letter-spacing:0.01em;
