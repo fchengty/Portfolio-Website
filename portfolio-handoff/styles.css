@@ -1,5 +1,5 @@
 @import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&family=Orbitron:wght@600;700&display=swap');
 
 /* seamless cross-page navigation (Profile <-> Portfolio) in browsers that support it;
    plain instant navigation everywhere else, so nothing breaks */
@@ -8,8 +8,8 @@
 }
 
 :root{
-  /* committed dark-navy identity — no light variant, by design */
-  --bg:#0B0F1A;
+  /* committed near-black identity — no light variant, by design */
+  --bg:#0A0A0A;
   --surface:#131A2B;
   --surface-2:#1B2338;
   --surface-3:#232C45;
@@ -21,6 +21,8 @@
   --accent-strong:#F0B24C;
   --accent-ink:#1A1206;
   --accent-soft:rgba(226,161,58,0.14);
+  --heading:#3EB8FF;
+  --heading-glow:0 0 22px rgba(62,184,255,0.35), 0 0 6px rgba(62,184,255,0.28);
   --shadow:rgba(0,0,0,0.5);
   --text-measure:640px; /* shared paragraph width so body copy lines up across the site */
 }
@@ -36,12 +38,12 @@ body{
 ::selection{ background:var(--accent-soft); color:var(--ink); }
 .wrap{ max-width:1100px; margin:0 auto; }
 a{ color:inherit; }
-h1,h2,h3{ font-family:'Clash Display',system-ui,sans-serif; font-weight:600; text-wrap:balance; margin:0; color:var(--ink); }
-.accent-name{ color:var(--accent); }
+h1,h2,h3{ font-family:'Orbitron',system-ui,sans-serif; font-weight:600; text-wrap:balance; margin:0; color:var(--heading); text-shadow:var(--heading-glow); }
+.accent-name{ color:var(--heading); }
 .hl{ color:var(--accent); }
 .eyebrow{
-  font-family:'Clash Display',system-ui,sans-serif; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--accent); margin:0 0 12px; font-weight:600;
+  font-family:'Orbitron',system-ui,sans-serif; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--heading); margin:0 0 12px; font-weight:600;
 }
 p{ color:var(--ink-soft); }
 
@@ -167,7 +169,7 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
 }
 .stage:first-child{ border-top:none; padding-top:0; }
 .stage-label{ display:flex; flex-direction:column; gap:6px; position:sticky; top:88px; align-self:start; }
-.stage-num{ font-family:'Clash Display',system-ui,sans-serif; color:var(--accent); font-size:0.85rem; font-weight:600; }
+.stage-num{ font-family:'Orbitron',system-ui,sans-serif; color:var(--heading); font-size:0.85rem; font-weight:600; }
 .stage-label h3{ font-size:1.3rem; }
 
 /* stage paragraphs fill the same column the image gallery below them uses —
