@@ -39,7 +39,7 @@ body{
 .wrap{ max-width:1100px; margin:0 auto; }
 a{ color:inherit; }
 h1,h2,h3{ font-family:'Orbitron',system-ui,sans-serif; font-weight:600; text-wrap:balance; margin:0; color:var(--heading); text-shadow:var(--heading-glow); }
-.accent-name{ color:var(--heading); }
+.accent-name{ color:var(--accent); text-shadow:none; }
 .hl{ color:var(--accent); }
 .eyebrow{
   font-family:'Orbitron',system-ui,sans-serif; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
@@ -161,6 +161,16 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
 .case-intro h1{ font-size:clamp(2.2rem,5vw,3.4rem); line-height:1.05; }
 .case-intro .bio{ margin-top:18px; font-size:1.05rem; }
 
+/* descriptive/body copy on the Portfolio page only — brighter than the site-wide
+   ink-soft default so the ADDIE write-up doesn't read as dull; bold/.hl terms
+   inside it stay the gold accent, matching the tag/highlight treatment elsewhere */
+.case-intro .bio,
+.stage-body p,
+.analyse-list{ color:var(--ink); }
+.case-intro .bio b, .case-intro .bio strong,
+.stage-body b, .stage-body strong,
+.analyse-list b, .analyse-list strong{ color:var(--accent); }
+
 /* ---- ADDIE ROWS ---- */
 .addie{ display:flex; flex-direction:column; }
 .stage{
@@ -220,7 +230,7 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
   font-family:'Clash Display',system-ui,sans-serif;
 }
 
-.analyse-list{ list-style:none; margin:0 0 20px; padding:0; color:var(--ink-soft); }
+.analyse-list{ list-style:none; margin:0 0 20px; padding:0; }
 .analyse-list li{ position:relative; padding-left:24px; margin-bottom:8px; }
 .analyse-list li::before{ content:"\2192"; position:absolute; left:0; color:var(--accent); }
 
