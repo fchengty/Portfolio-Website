@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Learning Design Portfolio &mdash; Francis Cheng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&family=Orbitron:wght@600;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,7 +33,12 @@
   <header class="case-intro load-in">
     <p class="eyebrow">Case Study</p>
     <h1>Foundations of Supportive Counseling</h1>
-    <p class="bio">A full branching counselling simulation, built stage by stage through the <span class="hl">ADDIE</span> model &mdash; from the first SME conversation to the finished Storyline build. This is a portfolio piece, not real client work, built to demonstrate skill.</p>
+    <p class="bio">An eLearning module showcasing a full branching counselling simulation, built stage by stage through the <span class="hl">ADDIE</span> model. This portfolio work is built to demonstrate how the module will be designed from the first SME conversation to the finished Storyline build.</p>
+    <a class="module-launch" href="module/story.html" target="_blank" rel="noopener">
+      <img src="images/Slide1.png" alt="The module's opening welcome screen">
+      <span class="module-launch-cta">Launch the module<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H6.5M11.5 4.5V9.5"/></svg></span>
+      <span class="module-launch-caption">Interactive module &middot; opens in a new tab</span>
+    </a>
   </header>
 </div>
 
@@ -52,7 +62,7 @@
                 <li>Conduct basic research on the topic</li>
                 <li>Meet the SMEs to determine requirements, scope and confirm a basic curriculum flow</li>
               </ul>
-              <p>Learning objectives are framed using <span class="hl">Bloom's Taxonomy</span>, so each one names a behaviour the learner should be able to do.</p>
+              <p>Learning objectives are framed using <span class="hl">Bloom's Taxonomy</span>, so each one describes a skill the learner will learn how to do.</p>
               <div class="objectives">
                 <div class="objective-box">Recognise the importance of foundational verbal and non-verbal techniques in supportive conversations</div>
                 <div class="objective-box">Identify core verbal and non-verbal techniques used in supportive conversations</div>
@@ -93,7 +103,7 @@
       <div class="stage" id="design">
         <div class="stage-label"><span class="stage-num">02</span><h3>Design</h3></div>
         <div class="stage-body">
-          <p>The CDD becomes a storyboard: every screen planned and every line of narration drafted, mocked up directly in Storyline so the structure, pacing, and content can be reviewed before any branching logic goes in.</p>
+          <p>The CDD will be translated into a storyboard. The storyboard will show every screen with its corresponding narration so the structure, pacing, and content can be reviewed before any branching or triggering logic goes in.</p>
           <div class="stage-media">
             <figure class="shot">
               <img src="images/Slide1.png" alt="The module's opening welcome slide">
@@ -120,21 +130,26 @@
               <figcaption>The branching activity, built in Storyline</figcaption>
             </figure>
           </div>
+          <p>Instructions are often written to explain any slide or activity movement or how animations are paired with narrations. It is important to review the content, activities and assessments at this stage thoroughly before the module is fully actualised. Other important details that should be finalised at this stage are the general design style and avatars as they may be used widely during actualisation and will be harder to change.</p>
         </div>
       </div>
 
       <div class="stage" id="develop">
         <div class="stage-label"><span class="stage-num">03</span><h3>Develop</h3></div>
         <div class="stage-body">
-          <p>The storyboard gets built for real: variables, triggers, and branching logic wired up in Storyline, alongside work with graphic designers and stock or custom assets to give the module its final visual look.</p>
-          <a class="btn arrow" href="module/story.html" target="_blank" rel="noopener">Launch the module<span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H6.5M11.5 4.5V9.5"/></svg></span></a>
+          <p>Once the storyboard has been cleared, the module gets built for real. The variables, triggers, and branching logic will be wired up in Storyline, alongside work with graphic designers and stock or custom assets to give the module its final visual look.</p>
+          <a class="module-launch" href="module/story.html" target="_blank" rel="noopener">
+            <img src="images/Slide1.png" alt="The module's opening welcome screen">
+            <span class="module-launch-cta">Launch the module<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 11.5L11.5 4.5M11.5 4.5H6.5M11.5 4.5V9.5"/></svg></span>
+            <span class="module-launch-caption">Interactive module &middot; opens in a new tab</span>
+          </a>
         </div>
       </div>
 
       <div class="stage" id="implement-evaluate">
         <div class="stage-label"><span class="stage-num">04&ndash;05</span><h3>Implement &amp; Evaluate</h3></div>
         <div class="stage-body">
-          <p>Finally, the module goes live: working with the SME to place it on their LMS, then testing it with real learners to check whether it actually changes how they perform &mdash; not just whether they finished it.</p>
+          <p>Finally, the module goes live: working with the SME to place it on their LMS, then testing it with real learners to check whether it actually changes how they perform. If the received feedback is consistent among students, a meeting may be scheduled with the SMEs to determine how to improve the content to address it.</p>
         </div>
       </div>
 

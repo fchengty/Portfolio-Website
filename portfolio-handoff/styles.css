@@ -1,5 +1,10 @@
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&family=Orbitron:wght@600;700&display=swap');
+/* fonts are loaded via <link rel="stylesheet"> in each page's <head>, not @import
+   here — @import chains are render-blocking and fetch serially (this file, THEN
+   the imported stylesheet, THEN its font files), which was the leading suspect
+   for the nav pill transition sometimes just snapping: if the destination page's
+   fonts are still resolving when the browser checks its view-transition opt-in,
+   it can skip the transition for that navigation. <link> tags let the browser
+   discover and fetch both font stylesheets in parallel with this file instead. */
 
 /* seamless cross-page navigation (Profile <-> Portfolio) in browsers that support it;
    plain instant navigation everywhere else, so nothing breaks */
@@ -142,10 +147,10 @@ nav.scrolled{ border-bottom-color:var(--border); }
 .card-text{ display:flex; flex-direction:column; align-items:flex-start; }
 .card-text h1{ font-size:clamp(2.1rem,4.5vw,3.2rem); line-height:1.05; }
 .titles{
-  font-family:'Space Mono',monospace; font-size:0.82rem; letter-spacing:0.03em; color:var(--accent);
+  font-family:'Orbitron',system-ui,sans-serif; font-size:0.78rem; letter-spacing:0.03em; color:var(--accent);
   margin:14px 0 0;
 }
-.titles .sep{ color:var(--border); margin-inline:8px; }
+.titles .sep{ color:var(--accent); margin-inline:8px; }
 .card-text .bio{ margin-top:20px; font-size:1.02rem; max-width:50ch; color:var(--ink); }
 .card-text .btn-row{ margin-top:26px; }
 
@@ -232,17 +237,21 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
 }
 .flow-step{
   position:relative; background:var(--surface-2); border:1px solid var(--border); border-radius:8px;
-  padding:10px 14px; font-family:'Space Mono',monospace; font-size:0.76rem; text-align:center; color:var(--ink);
+  padding:10px 14px; font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:0.82rem; text-align:center; color:var(--ink);
 }
 .flow-step + .flow-step{ margin-top:24px; }
+/* the connector needs to read clearly as a flow, not blend into the panel —
+   solid accent color plus a bit of width and glow instead of a hairline the
+   same tone as --border (which was nearly invisible on --surface) */
 .flow-step + .flow-step::before{
-  content:""; position:absolute; left:50%; top:-24px; width:1px; height:24px;
-  background:var(--border); transform:translateX(-50%);
+  content:""; position:absolute; left:50%; top:-24px; width:2px; height:24px;
+  background:var(--accent); box-shadow:0 0 6px rgba(226,161,58,0.5); transform:translateX(-50%);
 }
 .flow-step:first-child{ font-weight:700; }
 .flow-step.highlight{
   background:var(--accent-soft); border-color:var(--accent); color:var(--accent); font-weight:700;
-  font-family:'Clash Display',system-ui,sans-serif;
+  font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
 .analyse-list{ list-style:none; margin:0 0 20px; padding:0; }
@@ -254,6 +263,31 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
   background:var(--accent-soft); border:1px solid var(--accent); border-radius:10px;
   padding:12px 16px; color:var(--accent); font-weight:600; font-size:0.92rem;
   font-family:'Clash Display',system-ui,sans-serif;
+}
+
+/* ---- MODULE LAUNCH CARD (case intro + Develop stage) ---- */
+.module-launch{
+  position:relative; display:block; margin-top:22px; max-width:640px;
+  border-radius:14px; overflow:hidden; border:1px solid var(--border);
+  box-shadow:0 20px 44px -26px var(--shadow);
+}
+.module-launch img{
+  width:100%; height:auto; display:block;
+  filter:brightness(.5) saturate(.9); transition:filter .2s, transform .3s;
+}
+.module-launch:hover img{ filter:brightness(.38) saturate(.9); transform:scale(1.02); }
+.module-launch-cta{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:1rem;
+  padding:14px 28px; border-radius:100px; box-shadow:0 16px 34px -12px rgba(0,0,0,0.65);
+  transition:background .15s, transform .15s;
+}
+.module-launch:hover .module-launch-cta{ background:var(--accent-strong); transform:translate(-50%,-50%) scale(1.05); }
+.module-launch-cta svg{ width:14px; height:14px; flex:none; }
+.module-launch-caption{
+  display:block; padding:10px 16px; font-family:'Space Mono',monospace; font-size:0.72rem;
+  letter-spacing:0.03em; color:var(--ink-faint); background:var(--surface); border-top:1px solid var(--border);
 }
 
 /* ---- LIGHTBOX (click a CDD/slide screenshot to view it larger) ---- */
