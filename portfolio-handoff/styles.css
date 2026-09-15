@@ -271,6 +271,9 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
   border-radius:14px; overflow:hidden; border:1px solid var(--border);
   box-shadow:0 20px 44px -26px var(--shadow);
 }
+/* only the case-intro instance is centered — the Develop-stage one stays
+   left-aligned, matching the paragraph above it and the rest of stage-body */
+.case-intro .module-launch{ margin-left:auto; margin-right:auto; }
 .module-launch img{
   width:100%; height:auto; display:block;
   filter:brightness(.5) saturate(.9); transition:filter .2s, transform .3s;
