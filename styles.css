@@ -201,6 +201,10 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
 .stage-label{ display:flex; flex-direction:column; gap:6px; position:sticky; top:88px; align-self:start; }
 .stage-num{ font-family:'Orbitron',system-ui,sans-serif; color:var(--heading); font-size:0.85rem; font-weight:600; }
 .stage-label h3{ font-size:1.3rem; }
+.stage-subtitle{
+  font-family:'Orbitron',system-ui,sans-serif; font-size:1.05rem; font-weight:600;
+  color:var(--heading); text-shadow:var(--heading-glow); margin:28px 0 12px;
+}
 
 /* stage paragraphs fill the same column the image gallery below them uses —
    only the standalone intro bio (nothing next to it) gets a fixed reading measure */
@@ -220,6 +224,38 @@ section{ padding-block:clamp(48px,7vw,80px); border-top:1px solid var(--border);
   color:var(--accent-ink); background:linear-gradient(100deg, var(--accent), var(--accent-strong));
   padding:8px 14px;
 }
+/* ---- Branching activity tree (Design stage) ---- */
+.branch-diagram{ display:flex; flex-direction:column; align-items:center; margin-top:24px; }
+.branch-root{ width:320px; }
+.branch-root figcaption{ justify-content:center; }
+.branch-trunk{
+  width:2px; height:22px; background:var(--accent); box-shadow:0 0 6px rgba(226,161,58,0.5);
+}
+.branch-connector{
+  position:relative; display:grid; grid-template-columns:1fr 1fr 1fr;
+  width:100%; max-width:820px; height:22px;
+}
+.branch-connector::before{
+  content:""; position:absolute; left:16.6667%; right:16.6667%; top:0; height:2px;
+  background:var(--accent); box-shadow:0 0 6px rgba(226,161,58,0.5);
+}
+.branch-connector span{
+  display:block; width:2px; height:100%; margin:0 auto;
+  background:var(--accent); box-shadow:0 0 6px rgba(226,161,58,0.5);
+}
+.branch-outcomes{
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;
+  width:100%; max-width:820px;
+}
+.branch-outcomes .shot{ width:100%; }
+
+@media (max-width:700px){
+  .branch-connector{ grid-template-columns:1fr; }
+  .branch-connector::before{ display:none; }
+  .branch-connector span:first-child, .branch-connector span:last-child{ display:none; }
+  .branch-outcomes{ grid-template-columns:1fr; max-width:320px; }
+}
+
 .shot.placeholder{
   aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; text-align:center;
   border-style:dashed; padding:14px;
