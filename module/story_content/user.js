@@ -13,7 +13,4 @@ var showPointer = player.showPointer;
 var hidePointer = player.hidePointer;
 var slideWidth = player.slideWidth;
 var slideHeight = player.slideHeight;
-var getKeyDown = player.getKeyDown;
-var keydown = player.keydown;
-var keyup = player.keyup;
 };

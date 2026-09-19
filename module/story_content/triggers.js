@@ -2,13 +2,13 @@ function ExecuteScript(strId)
 {
   switch (strId)
   {
-      case "6WY6EjZ4MkD":
+      case "5V9yFc7rASU":
         Script1();
         break;
-      case "6iQxRWwyLdu":
+      case "6flnS5X40MP":
         Script2();
         break;
-      case "5qjde6hihLh":
+      case "5inLzmmSwDm":
         Script3();
         break;
   }
@@ -29,9 +29,6 @@ var showPointer = player.showPointer;
 var hidePointer = player.hidePointer;
 var slideWidth = player.slideWidth;
 var slideHeight = player.slideHeight;
-var getKeyDown = player.getKeyDown;
-var keydown = player.keydown;
-var keyup = player.keyup;
 window.Script1 = function()
 {
   player.once(() => {
